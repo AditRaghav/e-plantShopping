@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "./CartSlice";
+
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
@@ -259,10 +262,19 @@ function ProductList({ onHomeClick }) {
       
         setAddedToCart((prevState) => ({ 
           ...prevState, 
-          [product.name]: true, // Set the current product's name as a key with value 'true' to mark it as added
+          [product.name]: true, 
         }));
       };
-      
+      const dispatch = useDispatch();
+
+      const CartItems = useSelector((state) => state.cart.items);
+
+
+        const calculateTotalQuantity = () => {
+        return CartItems
+            ? CartItems.reduce((total, item) => total + item.quantity, 0)
+            : 0;
+        };
     return (
         <div>
             <div className="navbar" style={styleObj}>
@@ -308,6 +320,7 @@ function ProductList({ onHomeClick }) {
                                         >
                                             Add to Cart
                                         </button>
+                                        <span>{calculateTotalQuantity()}</span>
                                     </div>
                                 ))}
                             </div>
