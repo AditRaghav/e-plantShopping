@@ -7,4 +7,6 @@
 
 
 
-### Repository Name `e-plantShopping` This repository contains the **e-plantShopping** application and its source code.
+### Repository Name `e-plantShopping` 
+
+This repository contains the **e-plantShopping** application and its source code.
